@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="timing.css">
+        <script src="time.js"></script>
+        <script src="jquery-3.4.1.js"></script>
+        <script src="jquery-3.4.1.min.js"></script> 
+    </head>
+    <body>
+        <div class="time_set">
+            <div class="min_set">
+                <input class="min_set_value" id="min_set_value">
+                <div class="min_set_text">分</div>
+            </div>
+            <div class="sec_set">
+                <input class="sec_set_value" id="sec_set_value">
+                <div class="sec_set_text">秒</div>
+            </div>
+        </div>
+
+        <div id="shiny-shadow" class="start_btn">
+            <button onclick="timeRun()"><span>开始！</span></button>
+        </div>
+
+        <div class="timing_wrap">
+            <div class="min_part">
+                <div class="min_text" id="min_text"></div>
+            </div>
+            <div class="dot_part">
+                <div class="dot_text">:</div>
+            </div>
+            <div class="sec_part">
+                <div class="sec_text" id="sec_text"></div>
+            </div>
+        </div>
+
+        <div id="shiny-shadow" class="end_btn">
+            <button onclick="timeOver()"><span>结束！</span></button>
+        </div>
+
+        <script>
+            $(window).ready(function(){
+                $(".timing_wrap").hide();
+                $(".end_btn").hide();
+            });
+
+            function timeRun(){
+                    $(".time_set").hide("slow");
+                    $(".start_btn").hide("slow");
+                    $(".timing_wrap").fadeIn("slow");
+                    $(".end_btn").fadeIn("slow");
+
+                    var minSet=document.getElementById("min_text");
+                    var secSet=document.getElementById("sec_text");
+
+                    var min=document.getElementById("min_set_value").value;
+                    var sec=document.getElementById("sec_set_value").value;
+
+                    var time=setInterval(function(){
+                    sec=sec-1;
+                    if(sec==0&&min!=0)
+                    {
+                        min--;
+                        sec=59;
+                    }
+                    if(min==0&sec==0)
+                    {
+                        clearInterval(time);
+                        timeOver();
+                    }
+                    if(sec<10)
+                    {
+                        minSet.innerHTML=min;
+                        secSet.innerHTML="0"+sec;
+                    }
+                    else{
+                        minSet.innerHTML=min;
+                        secSet.innerHTML=sec;
+                    }
+                },1000);
+            }
+
+            function timeOver(){
+                $(".timing_wrap").hide("slow");
+                $(".end_btn").hide("slow");
+                $(".time_set").fadeIn("slow");
+                $(".start_btn").fadeIn("slow");
+            }
+        </script>
+    </body>
+</html>
