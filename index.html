@@ -69,11 +69,7 @@
                         timeOver();
                     }
                     
-                    if(typeof(min)!="number" || typeof(sec)!="number")
-                    {
-                        alert("请输入合法数字");
-                        timeOver();
-                    }
+
                     var time=setInterval(function(){
                     sec=sec-1;
                     if(sec==0&&min!=0)
