@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="timing.css">
+        <link rel="stylesheet" href="./css/timing.css">
         <script src="time.js"></script>
-        <script src="jquery-3.4.1.js"></script>
-        <script src="jquery-3.4.1.min.js"></script> 
+        <script src="./js/jquery-3.4.1.js"></script>
+        <script src="./js/jquery-3.4.1.min.js"></script> 
     </head>
     <body>
+        <div class="title">
+            <h1>第八届寝室文化大赛</h1>
+        </div>
         <div class="time_set">
             <div class="min_set">
                 <input class="min_set_value" id="min_set_value">
@@ -45,17 +48,32 @@
             });
 
             function timeRun(){
+
                     $(".time_set").hide("slow");
                     $(".start_btn").hide("slow");
                     $(".timing_wrap").fadeIn("slow");
                     $(".end_btn").fadeIn("slow");
+                    
+                    var minSet=0;
+                    var secSet=0;
 
-                    var minSet=document.getElementById("min_text");
-                    var secSet=document.getElementById("sec_text");
+                    minSet=document.getElementById("min_text");
+                    secSet=document.getElementById("sec_text");
 
                     var min=document.getElementById("min_set_value").value;
                     var sec=document.getElementById("sec_set_value").value;
 
+                    if(min==0 && sec==0)
+                    {
+                        alert("还未输入时间");
+                        timeOver();
+                    }
+                    
+                    if(typeof(min)!="number" || typeof(sec)!="number")
+                    {
+                        alert("请输入合法数字");
+                        timeOver();
+                    }
                     var time=setInterval(function(){
                     sec=sec-1;
                     if(sec==0&&min!=0)
